@@ -1,0 +1,11 @@
+<main class="container my-4">
+  <h2 class="mb-3">Géneros disponibles</h2>
+  <div class="list-group">
+    <?php foreach ($genres as $genre): ?>
+      <a href="genre/<?= $genre->id_genero ?>" 
+         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <?= htmlspecialchars($genre->nombre) ?>
+      </a>
+    <?php endforeach ?>
+  </div>
+</main>

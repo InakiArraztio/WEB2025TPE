@@ -1,0 +1,23 @@
+<main class="container my-4">
+  <div class="card shadow-lg border-0">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="images/posters/<?= $movie->id_pelicula ?>.jpg" class="img-fluid rounded-start" alt="<?= htmlspecialchars($movie->titulo) ?>">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title"><?= htmlspecialchars($movie->titulo) ?></h3>
+          <p class="card-text">
+            <strong>Año:</strong> <?= htmlspecialchars($movie->anio) ?><br>
+            <strong>Rating:</strong> ⭐ <?= htmlspecialchars($movie->rating) ?>/10<br>
+            <strong>Género:</strong> 
+            <a href="genre/<?= $movie->id_genero ?>" class="badge bg-info text-dark">
+              <?= htmlspecialchars($movie->nombre_genero) ?>
+            </a>
+          </p>
+          <a href="home" class="btn btn-secondary mt-3">Volver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

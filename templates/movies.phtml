@@ -1,0 +1,19 @@
+<main class="container my-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <?php foreach ($movies as $movie): ?>
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="images/posters/<?= htmlspecialchars($movie->id_pelicula) ?>.jpg" class="card-img-top" alt="<?= htmlspecialchars($movie->titulo) ?>">
+          <div class="card-body">
+            <h5 class="card-title"><?= htmlspecialchars($movie->titulo) ?></h5>
+            <p class="card-text text-muted">
+              Año: <?= htmlspecialchars($movie->anio) ?><br>
+              Rating: ⭐ <?= htmlspecialchars($movie->rating) ?>/10
+            </p>
+            <a href="movie/<?= $movie->id_pelicula ?>" class="btn btn-outline-primary btn-sm">Ver más</a>
+          </div>
+        </div>
+      </div>
+    <?php endforeach ?>
+  </div>
+</main>
