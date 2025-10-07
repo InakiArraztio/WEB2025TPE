@@ -1,6 +1,7 @@
 <?php
 
 class FilmsView{
+
   public function showMovies($movies){
     require_once 'templates/layouts/header.phtml';
     require_once 'templates/movies.phtml';        
@@ -24,4 +25,17 @@ class FilmsView{
     require_once 'templates/error.phtml';
     require_once 'templates/layouts/footer.phtml';
   }
+
+  function showAddFilmForm($movie, $genre) {
+    require_once 'templates/layouts/header.phtml';
+    require_once 'templates/filmForm.phtml';
+    require_once 'templates/layouts/footer.phtml';
+  }
+
+  function updateFilmData($movie, $genres) {
+    require_once 'templates/layouts/header.phtml';
+    require_once 'templates/formEditFilm.phtml';
+    require_once 'templates/layouts/footer.phtml';
+}
+
 }

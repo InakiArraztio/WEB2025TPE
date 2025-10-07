@@ -1,0 +1,30 @@
+<main class="container my-4">
+  <h2 class="mb-3">Películas del género seleccionado</h2>
+
+  <?php if (!empty($filmsByGender)): ?>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <?php foreach ($filmsByGender as $film): ?>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($film->titulo) ?></h5>
+              <p class="card-text">
+                <strong>Año:</strong> <?= htmlspecialchars($film->anio) ?><br>
+                <strong>Rating:</strong> <?= htmlspecialchars($film->rating) ?><br>
+                <strong>Género:</strong> <?= htmlspecialchars($film->genero) ?>
+              </p>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php else: ?>
+    <div class="alert alert-warning text-center mt-4" role="alert">
+      No hay películas en este género.
+    </div>
+  <?php endif; ?>
+
+  <div class="mt-4 text-center">
+    <a href="genres" class="btn btn-outline-primary">Volver a Géneros</a>
+  </div>
+</main>
