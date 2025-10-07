@@ -11,8 +11,8 @@
             <strong>Año:</strong> <?= htmlspecialchars($movie->anio) ?><br>
             <strong>Rating:</strong> ⭐ <?= htmlspecialchars($movie->rating) ?>/10<br>
             <strong>Género:</strong> 
-            <a href="genre/<?= $movie->id_genero ?>" class="badge bg-info text-dark">
-              <?= htmlspecialchars($movie->nombre_genero) ?>
+            <a href="filmGender/<?= $movie->id_genero ?>" class="badge bg-info text-dark">
+              <?= htmlspecialchars($movie->genero) ?>
             </a>
           </p>
           <a href="home" class="btn btn-secondary mt-3">Volver</a>

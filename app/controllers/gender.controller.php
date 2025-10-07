@@ -16,4 +16,9 @@ class GenderController {
         $gender =$this->model->getGender();
         $this->view->showGender($gender);
     }
+
+    function filmsByGender($id) {
+        $filmsByGender = $this->model->filmsGender($id);
+        $this->view->showGenderFilms($filmsByGender);
+    }
 }
