@@ -1,21 +1,31 @@
 <main class="container my-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="mb-0">Géneros disponibles</h2>
-    <a href="home" class="btn btn-outline-success">Volver</a>
+
+    <!-- 🔹 Botón para agregar un nuevo género -->
+    <a href="addGender" class="btn btn-success">Agregar género</a>
+
+    <!-- 🔹 Botón para volver al home -->
+    <a href="home" class="btn btn-outline-secondary">Volver</a>
   </div>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     <?php foreach ($genres as $genre): ?>
       <div class="col">
-        <a href="filmGender/<?= $genre->id_genero ?>" class="text-decoration-none">
-          <div class="card h-100 border-0 shadow-sm hover-shadow">
-            <div class="card-body text-center">
-              <h5 class="card-title text-primary"><?= htmlspecialchars($genre->nombre) ?></h5>
-            </div>
+        <div class="card h-100 border-0 shadow-sm hover-shadow text-center p-3">
+          <h5 class="card-title text-primary"><?= htmlspecialchars($genre->nombre) ?></h5>
+
+          <!-- 🔹 Opciones de acción -->
+          <div class="mt-2">
+            <a href="filmGender/<?= $genre->id_genero ?>" class="btn btn-sm btn-outline-primary">Ver películas</a>
+            <a href="editGender/<?= $genre->id_genero ?>" class="btn btn-sm btn-outline-warning">Editar</a>
+            <a href="deleteGender/<?= $genre->id_genero ?>" class="btn btn-sm btn-outline-danger"
+               onclick="return confirm('¿Seguro que querés eliminar este género?');">Eliminar</a>
           </div>
-        </a>
+        </div>
       </div>
     <?php endforeach ?>
   </div>
 </main>
+
 

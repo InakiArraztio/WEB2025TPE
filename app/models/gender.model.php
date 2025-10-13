@@ -1,5 +1,4 @@
 <?php
-
 class GenderModel {
     private $db;
 
@@ -8,14 +7,40 @@ class GenderModel {
     }
 
     private function getConnection() {
-        return new PDO('mysql:host=localhost;dbname=db_blockbuster;charset=utf8', 'root', ''); 
+        return new PDO("mysql:host=localhost;port=3307;dbname=db_blockbuster;charset=utf8", "root", "");
     }
 
     function getGender() {
         $query = $this->db->prepare('SELECT * FROM genero');
         $query->execute();
-        $gender = $query->fetchAll(PDO::FETCH_OBJ);
-        return $gender;
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getGenderById($id) {
+        $query = $this->db->prepare('SELECT * FROM genero WHERE id_genero = ?');
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getByName($nombre) {
+        $query = $this->db->prepare('SELECT * FROM genero WHERE nombre = ?');
+        $query->execute([$nombre]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function insertGender($nombre) {
+        $query = $this->db->prepare('INSERT INTO genero (nombre) VALUES (?)');
+        $query->execute([$nombre]);
+    }
+
+    function updateGender($id, $nombre) {
+        $query = $this->db->prepare('UPDATE genero SET nombre = ? WHERE id_genero = ?');
+        $query->execute([$nombre, $id]);
+    }
+
+    function deleteGender($id) {
+        $query = $this->db->prepare('DELETE FROM genero WHERE id_genero = ?');
+        $query->execute([$id]);
     }
 
     function filmsGender($id) {
@@ -26,7 +51,6 @@ class GenderModel {
             WHERE p.id_genero = ?
         ');
         $query->execute([$id]);
-        $genderFilms = $query->fetchAll(PDO::FETCH_OBJ);
-        return $genderFilms;
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 }

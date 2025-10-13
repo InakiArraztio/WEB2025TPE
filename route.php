@@ -41,7 +41,7 @@ switch($params[0]) {
         $controller = new FilmsController();
         $controller->updateFilm($params[1]);
         break;
-    case 'editFilm';
+    case 'editFilm':
         //Muestro el formulario con los datos actuales
         $controller = new FilmsController();
         $controller->editFilm($params[1]);
@@ -52,29 +52,42 @@ switch($params[0]) {
         $controller->deleteFilm($params[1]);
         break;
     // ---- Generos (1) ----
-    case 'genres':
-        //B1: Listado de categorias: (generos)
-        $controller = new GenderController();
-        $controller->showGender();
-        break;
-    case 'filmGender':
-        //B2: Listado de items por categoria: (peliculas filtradas por genero)
-        $controller = new GenderController();
-        $controller->filmsByGender($params[1]);
-        break;
-    case 'addGendre':
+    // ---- Generos (1) ---- 
+case 'genders':
+    // Listado de géneros
+    $controller = new GenderController();
+    $controller->showGender();
+    break;
 
-        break;
-    case 'insertGenre':
+case 'filmGender':
+    // Películas filtradas por género
+    $controller = new GenderController();
+    $controller->filmsByGender($params[1]);
+    break;
 
-        break;
-    case 'updateGenre':
+case 'addGender':
+    $controller = new GenderController();
+    $controller->addGender();
+    break;
 
-        break;
-    case 'deleteGenre':
-    
-        break;
+case 'insertGender':
+    $controller = new GenderController();
+    $controller->insertGender();
+    break;
 
-    default:
-        echo 'Accion no definida';
+case 'updateGender':
+    $controller = new GenderController();
+    $controller->updateGender($params[1]);
+    break;
+
+case 'editGender':
+    $controller = new GenderController();
+    $controller->editGender($params[1]);
+    break;
+
+case 'deleteGender':
+    $controller = new GenderController();
+    $controller->deleteGender($params[1]);
+    break;
+
 }

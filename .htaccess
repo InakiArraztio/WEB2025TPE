@@ -1,8 +1,10 @@
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteEngine On
 
-    RewriteRule \.(?:css|js|jpe?g|gif|png)$ - [L]
+    # No reescribas si el archivo o directorio existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redirige todas las rutas hacia route.php con parámetro "action"
     RewriteRule ^(.*)$ route.php?action=$1 [QSA,L]
 </IfModule>
