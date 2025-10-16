@@ -7,7 +7,7 @@ class GenderModel {
     }
 
     private function getConnection() {
-        return new PDO("mysql:host=localhost;port=3307;dbname=db_blockbuster;charset=utf8", "root", "");
+        return new PDO('mysql:host=localhost;dbname=db_blockbuster;charset=utf8', 'root', ''); 
     }
 
     function getGender() {

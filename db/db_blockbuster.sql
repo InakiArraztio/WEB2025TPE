@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2025 a las 03:15:01
+-- Tiempo de generación: 10-10-2025 a las 23:32:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,7 +64,27 @@ INSERT INTO `pelicula` (`id_pelicula`, `titulo`, `anio`, `rating`, `id_genero`) 
 (1, 'Terminator 2', 1991, 9, 1),
 (2, 'La máscara', 1994, 8, 2),
 (3, 'El Padrino', 1972, 10, 3),
-(4, 'Interestelar', 2014, 9, 4);
+(4, 'Interestelar', 2014, 9, 4),
+(5, 'Guerra Mundial Z', 2013, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_user` int(11) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `password` char(72) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_user`, `user`, `password`) VALUES
+(1, 'webadmin', '$2y$10$5IFF9crExF6nKJPuJktDkOiO6jidK9Q5YLI97ovst36r6Pyr.8hk.');
 
 --
 -- Índices para tablas volcadas
@@ -84,6 +104,12 @@ ALTER TABLE `pelicula`
   ADD KEY `fk_pelicula_genero` (`id_genero`);
 
 --
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -97,7 +123,13 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
