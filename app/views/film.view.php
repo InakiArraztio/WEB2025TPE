@@ -2,13 +2,13 @@
 
 class FilmsView{
 
-  public function showMovies($movies){
+  public function showMovies($movies, $user){
     require_once 'templates/layouts/header.phtml';
     require_once 'templates/movies.phtml';        
     require_once 'templates/layouts/footer.phtml';
   }
 
-  public function showMovie($movie){
+  public function showMovie($movie, $user){
     require_once 'templates/layouts/header.phtml';
     require_once 'templates/movie.phtml';        
     require_once 'templates/layouts/footer.phtml';
@@ -26,13 +26,13 @@ class FilmsView{
     require_once 'templates/layouts/footer.phtml';
   }
 
-  function showAddFilmForm($movie, $genre) {
+  function showAddFilmForm($movie, $genres, $user) {
     require_once 'templates/layouts/header.phtml';
     require_once 'templates/filmForm.phtml';
     require_once 'templates/layouts/footer.phtml';
   }
 
-  function updateFilmData($movie, $genres) {
+  function updateFilmData($movie, $genres, $user) {
     require_once 'templates/layouts/header.phtml';
     require_once 'templates/formEditFilm.phtml';
     require_once 'templates/layouts/footer.phtml';

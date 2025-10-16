@@ -29,25 +29,30 @@ class FilmsModel {
     }
 
     function insertFilm($titulo,$anio,$rating,$id_genero) {
-        $query = $this->db->prepare('INSERT INTO pelicula (titutlo,anio,rating,id_genero) VALUES (?,?,?,?)');
+        $query = $this->db->prepare('INSERT INTO pelicula (titulo,anio,rating,id_genero) VALUES (?,?,?,?)');
         $query->execute([$titulo,$anio,$rating,$id_genero]);
         return $this->db->lastInsertId();
     }
 
-    /* 
-    Funcion por si quiero verificar por nombre y año
-    function getFilmByTitleAndYear($titulo,$year) {
-        $query = $this->db->prepare('SELECT * FROM pelicula WHERE titulo = ? AND anio ? ');
+    
+    //Funcion para que verificar no exista una pelicula por nombre y año
+    function getFilmByTitleAndYear($titulo, $year) {
+        $query = $this->db->prepare('SELECT * FROM pelicula WHERE titulo = ? AND anio = ?');
         $query->execute([$titulo, $year]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
-    */
+    
     function updateFilm($id,$titulo,$anio,$rating,$id_genero) {
         $query = $this->db->prepare('
                         UPDATE pelicula SET  
                         titulo = ?, anio = ?, rating = ?, id_genero = ?
                         WHERE id_pelicula = ?');
         $query->execute([$titulo,$anio,$rating,$id_genero,$id]);
+    }
+
+    function deleteFilm($id) {
+        $query = $this->db->prepare('DELETE FROM pelicula WHERE id_pelicula = ?');
+        $query->execute([$id]);
     }
 
 }

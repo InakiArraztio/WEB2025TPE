@@ -12,26 +12,33 @@ class GenderController {
     }
 
    
-    function showGender() {
+    function showGender($request) {
         $genders = $this->model->getGender();
-        $this->view->showGender($genders);
+        $this->view->showGender($genders, $request->user);
     }
 
     
-    function filmsByGender($id) {
+    function filmsByGender($id, $request) {
         $filmsByGender = $this->model->filmsGender($id);
-        $this->view->showGenderFilms($filmsByGender);
+        $this->view->showGenderFilms($filmsByGender, $request->user);
     }
 
     
-    function addGender() {
-        require_once 'templates/layouts/header.phtml';
-        require_once 'templates/genderForm.phtml';
-        require_once 'templates/layouts/footer.phtml';
+    function addGender($request) {
+
+        if (!$request->user) {
+            return $this->view->showError('No tenés permisos para agregar géneros.');
+        }
+
+        $this->view->showAddGenderForm($request->user);
     }
 
    
-    function insertGender() {
+    function insertGender($request) {
+        if (!$request->user) {
+            return $this->view->showError('No tenés permisos para realizar esta acción.');
+        }
+
         if (empty($_POST['genero'])) {
             $this->view->showError('⚠️ Falta completar el campo "género".');
             return;
@@ -51,20 +58,21 @@ class GenderController {
     }
 
     
-    function editGender($id) {
+    function editGender($id, $request) {
         $gender = $this->model->getGenderById($id);
         if (!$gender) {
             $this->view->showError('No existe el género seleccionado.');
             return;
         }
-
-        require_once 'templates/layouts/header.phtml';
-        require_once 'templates/genderForm.phtml'; 
-        require_once 'templates/layouts/footer.phtml';
+        $this->view->showEditGenderForm($gender, $request->user);
     }
 
    
-    function updateGender($id) {
+    function updateGender($id, $request) {
+        if (!$request->user) {
+            return $this->view->showError('No tenés permisos para modificar.');
+        }
+
         if (empty($_POST['genero'])) {
             $this->view->showError('⚠️ Falta completar el campo.');
             return;
@@ -76,7 +84,11 @@ class GenderController {
     }
 
     
-    function deleteGender($id) {
+    function deleteGender($id, $request) {
+        if (!$request->user) {
+            return $this->view->showError('No tenés permisos para eliminar.');
+        }
+        
         $this->model->deleteGender($id);
         header("Location: " . BASE_URL . "genders");
     }
