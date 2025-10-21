@@ -11,6 +11,12 @@ Largel, Mauricio Ulises DNI: 45521763, mauriciolargel@gmail.com
 
 El proyecto consiste en el desarrollo de un sistema web para la gestión de películas, organizadas según su género.
 
+# Como desplegar el sitio.
+1. Desacargar el repositorio e iniciar apache y mySQL.
+2. Crear una base de datos llamada 'db_blockbuster'.
+3. Levantar el sitio. Al detectar la base de datos vacía el programa la llenara con tablas e información.
+4. Algunas funciones están ocultas detras de un inicio de sesión. Utilice los datos del usuario para poder realizar el ABM.
+
 # Descripción:
 
 En este proyecto se modela una base de datos de películas clasificadas por género.
