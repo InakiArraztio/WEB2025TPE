@@ -32,7 +32,7 @@ switch($params[0]) {
         $controller->getMovies($request);
         break;
 
-    case 'movieInfo':
+    case 'movie':
         //A2: Detalle de item (pelicula individual)
         $controller = new FilmsController();
         $controller->getMovie($params[1], $request);

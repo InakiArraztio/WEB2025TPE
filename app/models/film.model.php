@@ -54,5 +54,4 @@ class FilmsModel {
         $query = $this->db->prepare('DELETE FROM pelicula WHERE id_pelicula = ?');
         $query->execute([$id]);
     }
-
 }
