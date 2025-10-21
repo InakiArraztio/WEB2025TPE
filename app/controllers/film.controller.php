@@ -35,34 +35,28 @@ class FilmsController {
     }
 
     function insertFilm($request) {
-
         if (!$request->user) {
             return $this->view->showError('No tenés permisos para realizar esta acción.');
         }
-
         //Hago las validaciones del formulario para insertar
         if(empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['rating']) || empty($_POST['id_genero'])) {
-            
             return $this->view->showError('Faltan completo datos para insertar una pelicula');
+        } 
 
-        } else {
-            
-            $titulo = $_POST['titulo'];
-            $anio = $_POST['anio'];
-            $rating = $_POST['rating'];
-            $id_genero = $_POST['id_genero'];
+        $titulo = $_POST['titulo'];
+        $anio = $_POST['anio'];
+        $rating = $_POST['rating'];
+        $id_genero = $_POST['id_genero'];
 
-            $existingFilm = $this->model->getFilmByTitleAndYear($titulo, $anio);;
+        $existingFilm = $this->model->getFilmByTitleAndYear($titulo, $anio);
 
-            if($existingFilm) {
-                return $this->view->showError('Ya existe una pelicula con esos datos');
-            }
-
-            $this->model->insertFilm($titulo,$anio,$rating,$id_genero);
-            header("Location: " . BASE_URL);
+        if($existingFilm) {
+            return $this->view->showError('Ya existe una pelicula con esos datos');
         }
 
-    }
+        $this->model->insertFilm($titulo,$anio,$rating,$id_genero);
+            header("Location: " . BASE_URL);
+        }
 
     //Sirve para procesar el formulario y actualizar la base de datos
     function updatefilm($id, $request) {
@@ -74,7 +68,7 @@ class FilmsController {
         if(empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['rating']) || empty($_POST['id_genero'])) {
             return $this->view->showError('Faltan completo datos para modificar la pelicula');
 
-        } 
+        }
         //Toma los datos que el usuario edito
         $titulo = $_POST['titulo'];
         $anio = $_POST['anio'];
@@ -103,7 +97,6 @@ class FilmsController {
         //llamo a la vista para que muestra el formulario con los datos actuales
         $this->view->updateFilmData($movie,$genres, $request->user);
     }
-
 
     function deleteFilm($id, $request) {
         $movie = $this->model->getMovie($id);

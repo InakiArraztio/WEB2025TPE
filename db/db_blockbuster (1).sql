@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2025 a las 23:32:54
+-- Tiempo de generación: 21-10-2025 a las 16:09:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,9 @@ INSERT INTO `genero` (`id_genero`, `nombre`) VALUES
 (1, 'Acción'),
 (2, 'Comedia'),
 (3, 'Drama'),
-(4, 'Ciencia Ficción');
+(4, 'Ciencia Ficción'),
+(7, 'Thriller'),
+(8, 'Romance');
 
 -- --------------------------------------------------------
 
@@ -62,10 +64,12 @@ CREATE TABLE `pelicula` (
 
 INSERT INTO `pelicula` (`id_pelicula`, `titulo`, `anio`, `rating`, `id_genero`) VALUES
 (1, 'Terminator 2', 1991, 9, 1),
-(2, 'La máscara', 1994, 8, 2),
 (3, 'El Padrino', 1972, 10, 3),
 (4, 'Interestelar', 2014, 9, 4),
-(5, 'Guerra Mundial Z', 2013, 7, 1);
+(5, 'Guerra Mundial Z', 2013, 7, 1),
+(8, 'John Wick 4', 2023, 8, 1),
+(10, 'Son como niños', 2010, 6, 2),
+(11, 'Me before you', 2016, 7, 8);
 
 -- --------------------------------------------------------
 
@@ -117,13 +121,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

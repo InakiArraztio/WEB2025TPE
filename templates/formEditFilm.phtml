@@ -1,42 +1,40 @@
-<section class="container mt-5">
-  <h2>Editar Película</h2>
+<form action="updateFilm/<?= $movie->id_pelicula ?>" method="POST" enctype="multipart/form-data" class="mt-4">
+  <!-- Título -->
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título</label>
+    <input type="text" class="form-control" id="titulo" name="titulo" 
+           value="<?= htmlspecialchars($movie->titulo) ?>" required>
+  </div>
 
-  <form action="updateFilm/<?= $movie->id_pelicula ?>" method="POST" class="mt-4">
-    <!-- Título -->
-    <div class="mb-3">
-      <label for="titulo" class="form-label">Título</label>
-      <input type="text" class="form-control" id="titulo" name="titulo" 
-             value="<?= htmlspecialchars($movie->titulo) ?>" required>
-    </div>
+  <!-- Año -->
+  <div class="mb-3">
+    <label for="anio" class="form-label">Año</label>
+    <input type="number" class="form-control" id="anio" name="anio" 
+           value="<?= htmlspecialchars($movie->anio) ?>" required>
+  </div>
 
-    <!-- Año -->
-    <div class="mb-3">
-      <label for="anio" class="form-label">Año</label>
-      <input type="number" class="form-control" id="anio" name="anio" value="<?= htmlspecialchars($movie->anio) ?>" required>
-    </div>
+  <!-- Rating -->
+  <div class="mb-3">
+    <label for="rating" class="form-label">Rating</label>
+    <input type="number" step="0.1" class="form-control" id="rating" name="rating" 
+           value="<?= htmlspecialchars($movie->rating) ?>" required>
+  </div>
 
-    <!-- Rating -->
-    <div class="mb-3">
-      <label for="rating" class="form-label">Rating</label>
-      <input type="number" step="0.1" class="form-control" id="rating" name="rating" value="<?= htmlspecialchars($movie->rating) ?>" required>
-    </div>
+  <!-- Género -->
+  <div class="mb-3">
+    <label for="id_genero" class="form-label">Género</label>
+    <select class="form-select" id="id_genero" name="id_genero" required>
+      <option value="">Seleccionar género...</option>
+      <?php foreach ($genres as $genre): ?>
+        <option value="<?= $genre->id_genero ?>"
+          <?= $movie->id_genero == $genre->id_genero ? 'selected' : '' ?>>
+          <?= htmlspecialchars($genre->nombre) ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-success">Guardar Cambios</button>
+  <a href="<?= BASE_URL ?>" class="btn btn-secondary">Cancelar</a>
+</form>
 
-    <!-- Género -->
-    <div class="mb-3">
-      <label for="id_genero" class="form-label">Género</label>
-      <select class="form-select" id="id_genero" name="id_genero" required>
-        <option value="">Seleccionar género...</option>
-        <?php foreach ($genres as $genre): ?>
-          <option value="<?= $genre->id_genero ?>"
-            <?= $movie->id_genero == $genre->id_genero ? 'selected' : '' ?>>
-            <?= htmlspecialchars($genre->nombre) ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-    <a href="<?= BASE_URL ?>" class="btn btn-secondary">Cancelar</a>
-    <a href="home" class="btn btn-sm btn-outline-secondary">Volver</a>
-  </form>
-</section>
