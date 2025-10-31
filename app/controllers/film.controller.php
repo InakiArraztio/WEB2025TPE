@@ -24,7 +24,16 @@ class FilmsController {
 
     // A2 - Dellate de item
     function getMovie($id, $request) {
+        //paramas[1]??
+        if(empty($id)) {
+            return $this->view->showError('No se proporciono el ID de la pelicula.');
+        }
         $movie = $this->model->getMovie($id);
+        //Control de pelicila
+        if(!$movie) {
+            return $this->view->showError("No existe una pelicula con el id: $id");
+        }
+
         $this->view->showMovie($movie, $request->user);
     }
 
@@ -48,6 +57,12 @@ class FilmsController {
         $rating = $_POST['rating'];
         $id_genero = $_POST['id_genero'];
 
+        //Verifico que exista el genero
+        $genero = $this->modelGenre->getGenderById($id_genero);
+        if(!$genero) {
+            return $this->view->showError('El genero seleccionado no existe.');
+        }
+
         $existingFilm = $this->model->getFilmByTitleAndYear($titulo, $anio);
 
         if($existingFilm) {
@@ -69,11 +84,24 @@ class FilmsController {
             return $this->view->showError('Faltan completo datos para modificar la pelicula');
 
         }
+
+        //Verifico la pelicula existente
+        $movie = $this->model->getMovie($id);
+        if(!$movie) {
+            return $this->view->showError("No existe la pelicula con ese id: $id");
+        }
+
         //Toma los datos que el usuario edito
         $titulo = $_POST['titulo'];
         $anio = $_POST['anio'];
         $rating = $_POST['rating'];
         $id_genero = $_POST['id_genero'];
+
+        //Verfica genero existente
+        $genero = $this->modelGenre->getGenderById($id_genero);
+        if(!$genero) {
+            return $this->view->showError('El genero seleccionado no existe.');
+        }
 
         //Llamo al modelo para actualizar a la DB
         $this->model->updateFilm($id,$titulo,$anio,$rating,$id_genero);

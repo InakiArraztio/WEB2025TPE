@@ -54,4 +54,10 @@ class FilmsModel {
         $query = $this->db->prepare('DELETE FROM pelicula WHERE id_pelicula = ?');
         $query->execute([$id]);
     }
+
+    function getMoviesByGender($id) {
+        $query = $this->db->prepare('SELECT * FROM pelicula WHERE id_genero = ?');
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 }

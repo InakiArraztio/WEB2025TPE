@@ -1,14 +1,17 @@
 <?php
 require_once 'app/models/gender.model.php';
 require_once 'app/views/gender.view.php';
+require_once 'app/models/film.model.php';
 
 class GenderController {
     private $model;
     private $view;
+    private $movieModel;
 
     function __construct() {
         $this->model = new GenderModel();
         $this->view = new GenderView();
+        $this->movieModel = new FilmsModel();
     }
 
    
@@ -19,6 +22,15 @@ class GenderController {
 
     
     function filmsByGender($id, $request) {
+        if(empty($id)) {
+            return $this->view->showError('No se proporciono el ID del genero.');
+        }
+
+        $gender = $this->model->getGenderById($id);
+        if(!$gender) {
+            return $this->view->showError("No existe el genero con id $id");
+        }
+
         $filmsByGender = $this->model->filmsGender($id);
         $this->view->showGenderFilms($filmsByGender, $request->user);
     }
@@ -77,6 +89,12 @@ class GenderController {
             $this->view->showError('⚠️ Falta completar el campo.');
             return;
         }
+        
+        //Control de genero
+        $gender = $this->model->getGenderById($id);
+        if(!$gender) {
+            return $this->view->showError("El genero con el id: $id no existe.");
+        }
 
         $nombre = $_POST['genero'];
         $this->model->updateGender($id, $nombre);
@@ -87,6 +105,17 @@ class GenderController {
     function deleteGender($id, $request) {
         if (!$request->user) {
             return $this->view->showError('No tenés permisos para eliminar.');
+        }
+
+        $gender = $this->model->getGenderById($id);
+        if(!$gender) {
+            return $this->view->showError("El genero con el id: $id, no existe");
+        }
+
+        $movies = $this->movieModel->getMoviesByGender($id);
+
+        if(!empty($movies)) {
+            return $this->view->showError('No se puede eliminar el genero porque tiene peliculas asociadas.');
         }
         
         $this->model->deleteGender($id);
